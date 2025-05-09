@@ -1,0 +1,366 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3add44eww5pg"]
+
+[ext_resource type="Script" uid="uid://clwib5er3lcva" path="res://scenes/player.gd" id="1_3vyb7"]
+
+[node name="Player" type="Node2D" node_paths=PackedStringArray("_lane_lamp_kick1", "_lane_lamp_kick2", "_lane_lamp_snare1", "_lane_lamp_snare2", "_lane_lamp_hat1", "_lane_lamp_hat2")]
+script = ExtResource("1_3vyb7")
+_lane_lamp_kick1 = NodePath("CanvasLayer/LaneLamp/ColorRect6")
+_lane_lamp_kick2 = NodePath("CanvasLayer/LaneLamp/ColorRect7")
+_lane_lamp_snare1 = NodePath("CanvasLayer/LaneLamp/ColorRect5")
+_lane_lamp_snare2 = NodePath("CanvasLayer/LaneLamp/ColorRect8")
+_lane_lamp_hat1 = NodePath("CanvasLayer/LaneLamp/ColorRect4")
+_lane_lamp_hat2 = NodePath("CanvasLayer/LaneLamp/ColorRect9")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LaneLamp" type="GridContainer" parent="CanvasLayer"]
+offset_left = 160.0
+offset_right = 1120.0
+offset_bottom = 560.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 12
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/LaneLamp"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0.407843)
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/LaneLamp"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0.407843)
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/LaneLamp"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0.407843)
+
+[node name="ColorRect4" type="ColorRect" parent="CanvasLayer/LaneLamp"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 1, 1, 0.407843)
+
+[node name="ColorRect5" type="ColorRect" parent="CanvasLayer/LaneLamp"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 0, 0.407843)
+
+[node name="ColorRect6" type="ColorRect" parent="CanvasLayer/LaneLamp"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 0, 0, 0.407843)
+
+[node name="ColorRect7" type="ColorRect" parent="CanvasLayer/LaneLamp"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 0, 0, 0.407843)
+
+[node name="ColorRect8" type="ColorRect" parent="CanvasLayer/LaneLamp"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 0, 0.407843)
+
+[node name="ColorRect9" type="ColorRect" parent="CanvasLayer/LaneLamp"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 1, 1, 0.407843)
+
+[node name="ColorRect10" type="ColorRect" parent="CanvasLayer/LaneLamp"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0.407843)
+
+[node name="ColorRect11" type="ColorRect" parent="CanvasLayer/LaneLamp"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0.407843)
+
+[node name="ColorRect12" type="ColorRect" parent="CanvasLayer/LaneLamp"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0.407843)
+
+[node name="JudgeLine" type="ColorRect" parent="CanvasLayer"]
+offset_left = 160.0
+offset_top = 550.0
+offset_right = 1120.0
+offset_bottom = 560.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="DrumPad" type="GridContainer" parent="CanvasLayer"]
+offset_left = 165.0
+offset_top = 570.0
+offset_right = 1115.0
+offset_bottom = 680.0
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 12
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect4" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 1, 1, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 1, 1, 0.407843)
+
+[node name="ColorRect6" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 1, 1, 0.407843)
+
+[node name="ColorRect7" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 1, 1, 0.407843)
+
+[node name="ColorRect8" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 1, 1, 0.407843)
+
+[node name="ColorRect9" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 1, 1, 1)
+
+[node name="ColorRect10" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect11" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect12" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect13" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect14" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect15" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect16" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 0, 0.2)
+
+[node name="ColorRect17" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 0, 1)
+
+[node name="ColorRect18" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 0, 0.2)
+
+[node name="ColorRect19" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 0, 0.2)
+
+[node name="ColorRect20" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 0, 1)
+
+[node name="ColorRect21" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 0, 0.2)
+
+[node name="ColorRect22" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect23" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect24" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect25" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect26" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect27" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect28" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 0, 0, 0.2)
+
+[node name="ColorRect29" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 0, 0, 0.2)
+
+[node name="ColorRect30" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 0, 0, 1)
+
+[node name="ColorRect31" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 0, 0, 1)
+
+[node name="ColorRect32" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 0, 0, 0.2)
+
+[node name="ColorRect33" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 0, 0, 0.2)
+
+[node name="ColorRect34" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect35" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect36" type="ColorRect" parent="CanvasLayer/DrumPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LaneLine" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 160.0
+offset_right = 1120.0
+offset_bottom = 680.0
+theme_override_constants/separation = 79
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/LaneLine"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/LaneLine"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/LaneLine"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="CanvasLayer/LaneLine"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+
+[node name="ColorRect5" type="ColorRect" parent="CanvasLayer/LaneLine"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+
+[node name="ColorRect6" type="ColorRect" parent="CanvasLayer/LaneLine"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+
+[node name="ColorRect7" type="ColorRect" parent="CanvasLayer/LaneLine"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+
+[node name="ColorRect8" type="ColorRect" parent="CanvasLayer/LaneLine"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+
+[node name="ColorRect9" type="ColorRect" parent="CanvasLayer/LaneLine"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+
+[node name="ColorRect10" type="ColorRect" parent="CanvasLayer/LaneLine"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+
+[node name="ColorRect11" type="ColorRect" parent="CanvasLayer/LaneLine"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+
+[node name="ColorRect12" type="ColorRect" parent="CanvasLayer/LaneLine"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+
+[node name="ColorRect13" type="ColorRect" parent="CanvasLayer/LaneLine"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
