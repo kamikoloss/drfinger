@@ -28,12 +28,7 @@ func _ready() -> void:
 		_keys_lane_lamp[key].self_modulate = Color.TRANSPARENT
 
 
-func _process(delta: float) -> void:
-	pass
-
-
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
-		print(event.keycode)
 		if event.keycode in _keys_lane_lamp.keys():
 			_keys_lane_lamp[event.keycode].self_modulate = Color.WHITE if event.pressed else Color.TRANSPARENT
