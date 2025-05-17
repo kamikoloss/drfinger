@@ -11,8 +11,9 @@ script = ExtResource("1_rrrlq")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
+offset_top = -5.0
 offset_right = 80.0
-offset_bottom = 10.0
+offset_bottom = 5.0
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 layout_mode = 1
@@ -20,7 +21,8 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -80.0
-offset_bottom = 10.0
+offset_top = -5.0
+offset_bottom = 5.0
 grow_horizontal = 0
 
 [node name="Line" type="ColorRect" parent="."]
@@ -30,5 +32,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -6.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 0
