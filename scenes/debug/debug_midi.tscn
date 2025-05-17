@@ -1,0 +1,84 @@
+[gd_scene load_steps=3 format=3 uid="uid://bykwfd54a53ml"]
+
+[ext_resource type="Script" uid="uid://drudbo7g1swgm" path="res://scenes/debug/debug_midi.gd" id="1_sycrh"]
+[ext_resource type="PackedScene" uid="uid://c3crvy4w6coyr" path="res://scenes/debug/pad.tscn" id="2_44kci"]
+
+[node name="DebugMidi" type="Node2D" node_paths=PackedStringArray("_debug_label")]
+script = ExtResource("1_sycrh")
+_debug_label = NodePath("Label")
+
+[node name="DrumPad" type="GridContainer" parent="."]
+offset_right = 720.0
+offset_bottom = 720.0
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 4
+
+[node name="Pad" parent="DrumPad" instance=ExtResource("2_44kci")]
+layout_mode = 2
+
+[node name="Pad2" parent="DrumPad" instance=ExtResource("2_44kci")]
+layout_mode = 2
+
+[node name="Pad3" parent="DrumPad" instance=ExtResource("2_44kci")]
+layout_mode = 2
+
+[node name="Pad4" parent="DrumPad" instance=ExtResource("2_44kci")]
+layout_mode = 2
+
+[node name="Pad5" parent="DrumPad" instance=ExtResource("2_44kci")]
+layout_mode = 2
+
+[node name="Pad6" parent="DrumPad" instance=ExtResource("2_44kci")]
+layout_mode = 2
+
+[node name="Pad7" parent="DrumPad" instance=ExtResource("2_44kci")]
+layout_mode = 2
+
+[node name="Pad8" parent="DrumPad" instance=ExtResource("2_44kci")]
+layout_mode = 2
+
+[node name="Pad9" parent="DrumPad" instance=ExtResource("2_44kci")]
+layout_mode = 2
+
+[node name="Pad10" parent="DrumPad" instance=ExtResource("2_44kci")]
+layout_mode = 2
+
+[node name="Pad11" parent="DrumPad" instance=ExtResource("2_44kci")]
+layout_mode = 2
+
+[node name="Pad12" parent="DrumPad" instance=ExtResource("2_44kci")]
+layout_mode = 2
+
+[node name="Pad13" parent="DrumPad" instance=ExtResource("2_44kci")]
+layout_mode = 2
+
+[node name="Pad14" parent="DrumPad" instance=ExtResource("2_44kci")]
+layout_mode = 2
+
+[node name="Pad15" parent="DrumPad" instance=ExtResource("2_44kci")]
+layout_mode = 2
+
+[node name="Pad16" parent="DrumPad" instance=ExtResource("2_44kci")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="."]
+offset_left = 720.0
+offset_right = 1040.0
+offset_bottom = 480.0
+text = "XXXX
+XXXX
+XXXX
+XXXX
+XXXX
+XXXX
+XXXX
+XXXX
+XXXX
+XXXX
+XXXX
+XXXX
+XXXX
+XXXX
+XXXX
+XXXX"

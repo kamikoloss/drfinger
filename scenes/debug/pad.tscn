@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c3crvy4w6coyr"]
+
+[node name="Pad" type="MarginContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(1, 1, 1, 0.2)
