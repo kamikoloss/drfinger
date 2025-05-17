@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://d3add44eww5pg"]
 
-[ext_resource type="Script" uid="uid://clwib5er3lcva" path="res://scenes/player.gd" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://clwib5er3lcva" path="res://scenes/player/player.gd" id="1_3vyb7"]
 [ext_resource type="VideoStream" uid="uid://2y55hwopdbih" path="res://sheets/lqn/movie.ogv" id="2_qhqgy"]
-[ext_resource type="Script" uid="uid://bw4k5d4dbyg56" path="res://scenes/sheet.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://bw4k5d4dbyg56" path="res://scenes/player/sheet.gd" id="3_qhqgy"]
 [ext_resource type="PackedScene" uid="uid://baxftd1vjeraa" path="res://components/note_base.tscn" id="4_dqkch"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_dqkch"]
@@ -10,7 +10,7 @@ resource_name = "Notes"
 scenes/1/scene = ExtResource("4_dqkch")
 
 [sub_resource type="TileSet" id="TileSet_dqkch"]
-tile_size = Vector2i(320, 10)
+tile_size = Vector2i(1280, 10)
 sources/0 = SubResource("TileSetScenesCollectionSource_dqkch")
 
 [node name="Player" type="Node2D" node_paths=PackedStringArray("_lane_lamp_kick1", "_lane_lamp_kick2", "_lane_lamp_snare1", "_lane_lamp_snare2", "_lane_lamp_hat1", "_lane_lamp_hat2")]
@@ -432,6 +432,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="LaneLine" type="HBoxContainer" parent="Sheet/Control"]
+layout_mode = 0
 offset_left = 160.0
 offset_right = 1121.0
 offset_bottom = 720.0
