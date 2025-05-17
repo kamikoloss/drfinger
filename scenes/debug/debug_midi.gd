@@ -11,6 +11,7 @@ var pad_id_pitch_assign := {
 	9: 76, 10: 77, 11: 78, 12: 79,
 	13: 80, 14: 81, 15: 82, 16: 83,
 }
+
 var knob_ch := 0
 var knob_id_cnum_assign := {
 	1: 22, 2: 23,
@@ -86,14 +87,16 @@ func _update_knob(event: InputEventMIDI) -> void:
 
 
 func _update_label(event: InputEventMIDI) -> void:
-	if _debug_label:
-		var text := ""
-		text += "channel: %s\n" % [event.channel]
-		text += "message: %s\n" % [event.message]
-		text += "pitch: %s\n" % [event.pitch]
-		text += "velocity: %s\n" % [event.velocity]
-		text += "instrument: %s\n" % [event.instrument]
-		text += "pressure: %s\n" % [event.pressure]
-		text += "controller_number: %s\n" % [event.controller_number]
-		text += "controller_value: %s\n" % [event.controller_value]
-		_debug_label.text = text
+	if _debug_label == null:
+		return
+
+	var text := ""
+	text += "channel: %s\n" % [event.channel]
+	text += "message: %s\n" % [event.message]
+	text += "pitch: %s\n" % [event.pitch]
+	text += "velocity: %s\n" % [event.velocity]
+	text += "instrument: %s\n" % [event.instrument]
+	text += "pressure: %s\n" % [event.pressure]
+	text += "controller_number: %s\n" % [event.controller_number]
+	text += "controller_value: %s\n" % [event.controller_value]
+	_debug_label.text = text
