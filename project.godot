@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="ueatbeat"
+config/name="drfinger"
 run/main_scene="uid://d3add44eww5pg"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
