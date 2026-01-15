@@ -35,7 +35,6 @@ ratio = 1.7778
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Control/AspectRatioContainer"]
 layout_mode = 2
-volume_db = -11.999999
 autoplay = true
 expand = true
 
