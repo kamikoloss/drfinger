@@ -1,14 +1,12 @@
 class_name Player
 extends Node2D
 
-
 @export var _lane_lamp_kick1: ColorRect
 @export var _lane_lamp_kick2: ColorRect
 @export var _lane_lamp_snare1: ColorRect
 @export var _lane_lamp_snare2: ColorRect
 @export var _lane_lamp_hat1: ColorRect
 @export var _lane_lamp_hat2: ColorRect
-
 
 # TODO: KeyConfig
 var _keys_lane_lamp = {}

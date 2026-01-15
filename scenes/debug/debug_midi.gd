@@ -1,8 +1,6 @@
 extends Node2D
 
-
 @export var _debug_label: Label
-
 
 var pad_ch := 9
 var pad_id_pitch_assign := {
