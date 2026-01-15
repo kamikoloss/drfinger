@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://clwib5er3lcva" path="res://scenes/player_1/player.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bw4k5d4dbyg56" path="res://scenes/player_1/sheet.gd" id="3_qhqgy"]
-[ext_resource type="PackedScene" uid="uid://baxftd1vjeraa" path="res://components/note_base.tscn" id="4_dqkch"]
+[ext_resource type="PackedScene" uid="uid://baxftd1vjeraa" path="res://scenes/player_1/note_base.tscn" id="4_dqkch"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_dqkch"]
 resource_name = "Notes"
