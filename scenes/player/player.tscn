@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3add44eww5pg"]
+[gd_scene load_steps=6 format=3 uid="uid://d3add44eww5pg"]
 
 [ext_resource type="Script" uid="uid://clwib5er3lcva" path="res://scenes/player/player.gd" id="1_3vyb7"]
-[ext_resource type="VideoStream" uid="uid://2y55hwopdbih" path="res://sheets/lqn/movie.ogv" id="2_qhqgy"]
 [ext_resource type="Script" uid="uid://bw4k5d4dbyg56" path="res://scenes/player/sheet.gd" id="3_qhqgy"]
 [ext_resource type="PackedScene" uid="uid://baxftd1vjeraa" path="res://components/note_base.tscn" id="4_dqkch"]
 
@@ -36,8 +35,7 @@ ratio = 1.7778
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Control/AspectRatioContainer"]
 layout_mode = 2
-stream = ExtResource("2_qhqgy")
-volume_db = -12.0
+volume_db = -11.999999
 autoplay = true
 expand = true
 
