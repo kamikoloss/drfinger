@@ -7,8 +7,13 @@ const LINE_COLOR_3 := Color(0.4, 0.4, 0.4)
 const LINE_COLOR_4 := Color(0.2, 0.2, 0.2)
 const LINE_COLOR_5 := Color(0.1, 0.1, 0.1)
 
+var lane_type := LaneType.Type.NONE
+
 
 func _draw():
+    # 背景
+    draw_rect(Rect2(Vector2.ZERO, size), Color.BLACK)
+    draw_rect(Rect2(Vector2.ZERO, size), Color(LaneType.COLORS[lane_type], 0.1))
     # 横線
     var line_count := 16 # TODO
     var line_main_per := 4 # TODO

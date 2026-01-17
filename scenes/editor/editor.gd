@@ -1,17 +1,39 @@
 extends Control
 
+enum GridType {
+    GRID_16,
+    GRID_24,
+    GRID_32,
+}
+
+# TODO: Drum, MPC
+const LANE_TYPES: Array[LaneType.Type] = [
+    LaneType.Type.CYMBAL_CRASH,
+    LaneType.Type.HIHAT,
+    LaneType.Type.SNARE,
+    LaneType.Type.KICK,
+    LaneType.Type.TOM_HIGH,
+    LaneType.Type.TOM_LOW,
+    LaneType.Type.TOM_FLOOR,
+    LaneType.Type.CYMBAL_RIDE,
+]
+
 @export var _measure_scene: PackedScene
 
 @onready var _scroll_container: ScrollContainer = %ScrollContainer
 @onready var _measures_parent: Control = %MeasuresParent
+# UI
+@onready var _line_edit_bpm: LineEdit = %LineEditBpm
+@onready var _option_button_grid: OptionButton = %OptionButtonGrid
 
 
 func _ready() -> void:
     # Measure 配置
     var measure_count := 64
-    for i in (measure_count + 1):
+    for i in (measure_count + 2):
         var measure: Measure = _measure_scene.instantiate()
         measure.index = measure_count - i
+        measure.lane_types = LANE_TYPES
         _measures_parent.add_child(measure)
 
     # スクロールを一番下へ

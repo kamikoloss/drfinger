@@ -11,37 +11,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n4xh3")
+_lane_scene = ExtResource("1_i18qk")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Lane" parent="HBoxContainer" instance=ExtResource("1_i18qk")]
-layout_mode = 2
-
-[node name="Lane2" parent="HBoxContainer" instance=ExtResource("1_i18qk")]
-layout_mode = 2
-
-[node name="Lane3" parent="HBoxContainer" instance=ExtResource("1_i18qk")]
-layout_mode = 2
-
-[node name="Lane4" parent="HBoxContainer" instance=ExtResource("1_i18qk")]
-layout_mode = 2
-
-[node name="Lane5" parent="HBoxContainer" instance=ExtResource("1_i18qk")]
-layout_mode = 2
-
-[node name="Lane6" parent="HBoxContainer" instance=ExtResource("1_i18qk")]
-layout_mode = 2
-
-[node name="Lane7" parent="HBoxContainer" instance=ExtResource("1_i18qk")]
-layout_mode = 2
-
-[node name="Lane8" parent="HBoxContainer" instance=ExtResource("1_i18qk")]
-layout_mode = 2
-
 [node name="LabelIndex" type="Label" parent="."]
-unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.2)
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
