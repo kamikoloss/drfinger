@@ -12,6 +12,7 @@ extends Control
 
 func _ready() -> void:
     print("[Editor] _ready()")
+
     # ChartGrid のスクロールを一番下へ
     #_scroll_container.set_deferred("scroll_vertical", _scroll_container.get_v_scroll_bar().max_value) # 動かん
     _scroll_container.set_deferred("scroll_vertical", _chart_grid.custom_minimum_size.y)
