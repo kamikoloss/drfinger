@@ -20,8 +20,8 @@ const LANE_TYPES: Array[LaneType.Type] = [
 
 const GRID_LABELS: Dictionary[GridType, String] = {
     GridType.GRID_16: "1/16",
-    GridType.GRID_24: "1/24",
-    GridType.GRID_32: "1/32",
+    #GridType.GRID_24: "1/24",
+    #GridType.GRID_32: "1/32",
 }
 
 @export var _measure_scene: PackedScene
@@ -36,7 +36,7 @@ const GRID_LABELS: Dictionary[GridType, String] = {
 func _ready() -> void:
     # Measure 配置
     var measure_count := 64
-    for i in (measure_count + 2):
+    for i in (measure_count + 1):
         var measure: Measure = _measure_scene.instantiate()
         measure.index = measure_count - i
         measure.lane_types = LANE_TYPES
