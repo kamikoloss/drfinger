@@ -66,9 +66,6 @@ text = "Grid"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-item_count = 1
-popup/item_0/text = "Test"
-popup/item_0/id = 0
 
 [node name="_" type="MarginContainer" parent="MarginContainer/HBoxContainer/Left/VBoxContainer"]
 layout_mode = 2
@@ -89,10 +86,10 @@ size_flags_stretch_ratio = 2.0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="MeasuresParent" type="VBoxContainer" parent="MarginContainer/HBoxContainer/ScrollContainer/Measures"]
 unique_name_in_owner = true

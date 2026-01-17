@@ -18,6 +18,12 @@ const LANE_TYPES: Array[LaneType.Type] = [
     LaneType.Type.CYMBAL_RIDE,
 ]
 
+const GRID_LABELS: Dictionary[GridType, String] = {
+    GridType.GRID_16: "1/16",
+    GridType.GRID_24: "1/24",
+    GridType.GRID_32: "1/32",
+}
+
 @export var _measure_scene: PackedScene
 
 @onready var _scroll_container: ScrollContainer = %ScrollContainer
@@ -39,3 +45,8 @@ func _ready() -> void:
     # スクロールを一番下へ
     #_scroll_container.set_deferred("scroll_vertical", _scroll_container.get_v_scroll_bar().max_value) # 動かん
     _scroll_container.set_deferred("scroll_vertical", 99999999)
+
+    # Grid
+    for grid_type in GRID_LABELS:
+        _option_button_grid.add_item(GRID_LABELS[grid_type], grid_type)
+    _option_button_grid.selected = GridType.GRID_16 # TODO
