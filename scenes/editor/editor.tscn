@@ -54,6 +54,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "120"
 
+[node name="Offset" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Left/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Left/VBoxContainer/Offset"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Offset (sec)"
+
+[node name="LineEditOffset" type="LineEdit" parent="MarginContainer/HBoxContainer/Left/VBoxContainer/Offset"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0.0"
+
 [node name="Grid" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Left/VBoxContainer"]
 layout_mode = 2
 
