@@ -48,7 +48,10 @@ func _gui_input(event: InputEvent) -> void:
         var event_mouse_button := event as InputEventMouseButton
         if event_mouse_button.pressed:
             if event_mouse_button.button_index == MOUSE_BUTTON_LEFT:
-                pass
+                var lane_type := lane_types[_hover_lane_index]
+                var tick := int(BEAT_CLOCK * _hover_step_index / float(steps_per_beat))
+                var note := Note.new(lane_type, tick)
+                notes.append(note)
             elif event_mouse_button.button_index == MOUSE_BUTTON_RIGHT:
                 pass
     elif event is InputEventMouseMotion:
@@ -86,7 +89,12 @@ func _draw() -> void:
         line_x += _lane_width
         draw_line(Vector2(line_x, 0), Vector2(line_x, size.y), LINE_COLOR_1)
     # TODO: 描画最適化
-    # -- notes --
+    for note in notes:
+        var lane_index := lane_types.find(note.lane_type)
+        var step_index := int(note.tick * steps_per_beat / float(BEAT_CLOCK))
+        var note_pos := Vector2(lane_index * _lane_width, step_index * _step_height)
+        var note_color := LaneType.COLORS[note.lane_type]
+        draw_rect(Rect2(note_pos, Vector2(_lane_width, _step_height)), note_color)
     # TODO: 描画最適化
     var ghost_pos := Vector2(_hover_lane_index * _lane_width, _hover_step_index * _step_height)
     var ghost_color := Color(LaneType.COLORS[lane_types[_hover_lane_index]], 0.4)
