@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="drfinger"
-run/main_scene="uid://d3add44eww5pg"
+run/main_scene="uid://cye3ohxqm86qn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
