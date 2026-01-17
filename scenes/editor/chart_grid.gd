@@ -29,17 +29,16 @@ var bar_count := 64
 ## 1小節の高さ (px)
 var bar_height := 240.0
 
-## レーンの幅
-var _lane_width := 0.0
-## 1ステップの高さ
-var _step_height := 0.0
+
+var _lane_width = 0.0 # TODO: 再計算
+var _step_height = 0.0 # TODO: 再計算
+
+var _hover_lane_index := 0
+var _hover_step_index := 0
 
 
 func _ready() -> void:
     print("[ChartGrid] _ready()")
-    _lane_width = size.x / lane_types.size()
-    _step_height = bar_height / (beats_per_bar * steps_per_beat)
-
     # 高さを初期化する
     custom_minimum_size = Vector2(0, bar_height * bar_count)
 
@@ -49,12 +48,18 @@ func _gui_input(event: InputEvent) -> void:
         var event_mouse_button := event as InputEventMouseButton
         if event_mouse_button.pressed:
             if event_mouse_button.button_index == MOUSE_BUTTON_LEFT:
-                var note := _get_note_from_pos(event.position)
+                pass
             elif event_mouse_button.button_index == MOUSE_BUTTON_RIGHT:
-                var note := _get_note_from_pos(event.position)
+                pass
+    elif event is InputEventMouseMotion:
+        #var event_mouse_motion := event as InputEventMouseMotion
+        _hover_lane_index = int(event.position.x / _lane_width)
+        _hover_step_index = int(event.position.y / _step_height)
+        queue_redraw()
 
 
 func _draw() -> void:
+    # TODO: ここに入れないと初期化うまくいかないがここでしたくない
     _lane_width = size.x / lane_types.size()
     _step_height = bar_height / (beats_per_bar * steps_per_beat)
     # 背景色 (全体)
@@ -80,11 +85,9 @@ func _draw() -> void:
     for lane_index in lane_types.size():
         line_x += _lane_width
         draw_line(Vector2(line_x, 0), Vector2(line_x, size.y), LINE_COLOR_1)
-
-
-func _get_note_from_pos(pos: Vector2) -> Note:
-    var lane_index := int(pos.x / _lane_width)
-    var lane_type := lane_types[lane_index]
-    var ticks := int((size.y - pos.y) * beats_per_bar * BEAT_CLOCK / _step_height)
-    print("_get_note_from_pos(%s) lane_type: %s, ticks: %s" % [pos, LaneType.Type.keys()[lane_type], ticks])
-    return Note.new(lane_type, ticks)
+    # TODO: 描画最適化
+    # -- notes --
+    # TODO: 描画最適化
+    var ghost_pos := Vector2(_hover_lane_index * _lane_width, _hover_step_index * _step_height)
+    var ghost_color := Color(LaneType.COLORS[lane_types[_hover_lane_index]], 0.4)
+    draw_rect(Rect2(ghost_pos, Vector2(_lane_width, _step_height)), ghost_color)
