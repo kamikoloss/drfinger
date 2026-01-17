@@ -1,12 +1,14 @@
 extends Control
 
+@export var _measure_scene: PackedScene
+
+@onready var _measures_parent: Control = %MeasuresParent
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-    pass
+    # Measure 配置
+    var measure_count := 64
+    for i in (measure_count + 1):
+        var measure: Measure = _measure_scene.instantiate()
+        measure.index = measure_count - i
+        _measures_parent.add_child(measure)

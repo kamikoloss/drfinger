@@ -1,6 +1,5 @@
 class_name Lane
 extends Control
-## 1レーンの1小節
 
 const LINE_COLOR_1 := Color(0.8, 0.8, 0.8)
 const LINE_COLOR_2 := Color(0.6, 0.6, 0.6)
