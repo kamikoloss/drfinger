@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cye3ohxqm86qn"]
 
 [ext_resource type="Script" uid="uid://coiaagd53ymkl" path="res://scenes/editor/editor.gd" id="1_m0is4"]
-[ext_resource type="PackedScene" uid="uid://n6lechjjttur" path="res://scenes/editor/measure.tscn" id="2_5cfe8"]
+[ext_resource type="Script" uid="uid://b505xdxi3r8jw" path="res://scenes/editor/chart_grid.gd" id="2_m0is4"]
 
 [node name="Editor" type="Control"]
 layout_mode = 3
@@ -11,7 +11,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_m0is4")
-_measure_scene = ExtResource("2_5cfe8")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -20,17 +19,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-
-[node name="Left" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Left" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/Left"]
 layout_mode = 2
@@ -63,22 +63,51 @@ size_flags_horizontal = 3
 text = "Offset (sec)"
 
 [node name="LineEditOffset" type="LineEdit" parent="MarginContainer/HBoxContainer/Left/VBoxContainer/Offset"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0.0"
 
-[node name="Grid" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Left/VBoxContainer"]
+[node name="Beats" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Left/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Left/VBoxContainer/Grid"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Left/VBoxContainer/Beats"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Grid"
+text = "Beats per Bar"
 
-[node name="OptionButtonGrid" type="OptionButton" parent="MarginContainer/HBoxContainer/Left/VBoxContainer/Grid"]
+[node name="LineEditBeats" type="LineEdit" parent="MarginContainer/HBoxContainer/Left/VBoxContainer/Beats"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+text = "4"
+
+[node name="Steps" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Left/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Left/VBoxContainer/Steps"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Steps per Beat"
+
+[node name="LineEditSteps" type="LineEdit" parent="MarginContainer/HBoxContainer/Left/VBoxContainer/Steps"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "4"
+
+[node name="Snap" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Left/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Left/VBoxContainer/Snap"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Note Snap"
+
+[node name="CheckBoxSnap" type="CheckBox" parent="MarginContainer/HBoxContainer/Left/VBoxContainer/Snap"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
 
 [node name="Swing" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Left/VBoxContainer"]
 visible = false
@@ -106,8 +135,6 @@ text = "Save"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_bottom = 10
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/Center"]
 unique_name_in_owner = true
@@ -115,20 +142,16 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="MeasuresParent" type="VBoxContainer" parent="MarginContainer/HBoxContainer/Center/ScrollContainer"]
+[node name="ChartGrid" type="Control" parent="MarginContainer/HBoxContainer/Center/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 0
+script = ExtResource("2_m0is4")
 
 [node name="Right" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/Right"]
 layout_mode = 2
