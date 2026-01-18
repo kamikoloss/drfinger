@@ -11,7 +11,7 @@ const NOTE_OUTLINE_COLOR := Color(0.4, 0.4, 0.4)
 var notes: Array[Note] = []
 
 # TODO: Drum, MPC
-var lane_types: Array[LaneType.Type] = []
+var lane_types: Array[String] = []
 ## 1小節あたりの拍子数
 var beats_per_bar := 4
 ## 1拍あたりの分割数
@@ -41,6 +41,7 @@ func _ready() -> void:
     custom_minimum_size = Vector2(0, bar_height * bar_count)
 
     # サイズに関する変数の初期化
+    # NOTE: size.x が resized の後じゃないと取得できない
     resized.connect(func() -> void:
         _lane_width = size.x / lane_types.size()
         _step_height = bar_height / (beats_per_bar * steps_per_beat)

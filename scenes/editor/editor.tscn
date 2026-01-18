@@ -176,3 +176,8 @@ modulate = Color(1, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Stop"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+oversampling_override = 1.0
+size = Vector2i(1280, 640)
+visible = true

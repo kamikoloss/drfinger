@@ -5,6 +5,13 @@ var lane_type := LaneType.Type.NONE
 var tick := 0
 
 
-func _init(lane_type_: LaneType.Type, tick_: int) -> void:
+func _init(lane_type_: String, tick_: int) -> void:
     lane_type = lane_type_
     tick = tick_
+
+
+func serialize() -> Dictionary:
+    return {
+        "lt": lane_type,
+        "ti": tick,
+    }
