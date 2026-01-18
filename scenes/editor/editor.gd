@@ -14,6 +14,7 @@ const CHART_FILE_NAME := "chart.json"
 @onready var _button_save: Button = %ButtonSave
 @onready var _button_play: Button = %ButtonPlay
 @onready var _button_stop: Button = %ButtonStop
+@onready var _label_last_saved_at: Label = %LabelLastSavedAt
 @onready var _file_dialog: FileDialog = %FileDialog
 
 
@@ -55,3 +56,4 @@ func _on_button_save_pressed() -> void:
         "notes": notes_json,
     })
     file.store_line(json_string)
+    _label_last_saved_at.text = Time.get_datetime_string_from_system(true)
