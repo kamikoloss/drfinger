@@ -11,17 +11,17 @@ var _last_saved_at := 0
 @onready var _line_dir: LineEdit = %LineEditDir
 @onready var _line_audio: LineEdit = %LineEditAudio
 @onready var _line_movie: LineEdit = %LineEditMovie
-@onready var _line_edit_bpm: LineEdit = %LineEditBpm
-@onready var _line_edit_offset: LineEdit = %LineEditOffset
-@onready var _line_edit_beats: LineEdit = %LineEditBeats
-@onready var _line_edit_steps: LineEdit = %LineEditSteps
-@onready var _option_button_grid: OptionButton = %OptionButtonGrid
+#@onready var _line_edit_bpm: LineEdit = %LineEditBpm
+#@onready var _line_edit_offset: LineEdit = %LineEditOffset
+#@onready var _line_edit_beats: LineEdit = %LineEditBeats
+#@onready var _line_edit_steps: LineEdit = %LineEditSteps
 @onready var _label_last_saved_at: Label = %LabelLastSavedAt
 @onready var _button_open: Button = %ButtonOpen
 @onready var _button_save: Button = %ButtonSave
 
 @onready var _button_play: Button = %ButtonPlay
 @onready var _button_stop: Button = %ButtonStop
+
 @onready var _file_dialog: FileDialog = %FileDialog
 
 
