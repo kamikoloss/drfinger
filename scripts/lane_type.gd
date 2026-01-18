@@ -20,7 +20,7 @@ const COLORS: Dictionary[String, Color] = {
     Type.CLICK:             Color("CCCCCC"),
     Type.CYMBAL_CRASH_1:    Color("0000FF"),
     Type.CYMBAL_CRASH_2:    Color("0000FF"),
-    Type.CYMBAL_RIDE:       Color("0000FF"),
+    Type.CYMBAL_RIDE:       Color("6633FF"),
     Type.HIHAT:             Color("00FFFF"),
     Type.KICK:              Color("FF00FF"),
     Type.SNARE:             Color("FFFF00"),
