@@ -41,7 +41,7 @@ func _ready() -> void:
 func _on_button_save_pressed() -> void:
     if not DirAccess.dir_exists_absolute(USER_DATA_BASE_DIR):
         DirAccess.make_dir_absolute(USER_DATA_BASE_DIR)
-    var track_name := "test" # TODO: 設定
+    var track_name := "sample" # TODO: 設定
     var dir_path := USER_DATA_BASE_DIR + "/" + track_name
     if not DirAccess.dir_exists_absolute(dir_path):
         DirAccess.make_dir_absolute(dir_path)
