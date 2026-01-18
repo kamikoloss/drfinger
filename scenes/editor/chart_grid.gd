@@ -1,11 +1,12 @@
 class_name ChartGrid
 extends Control
 
-const BEAT_CLOCK := 480
+const TICKS_PER_STEPS := 960
 
 const LINE_COLOR_1 := Color(0.4, 0.4, 0.4)
 const LINE_COLOR_2 := Color(0.2, 0.2, 0.2)
 const LINE_COLOR_3 := Color(0.1, 0.1, 0.1)
+const NOTE_OUTLINE_COLOR := Color(0.4, 0.4, 0.4)
 
 var notes: Array[Note] = []
 
@@ -53,7 +54,7 @@ func _gui_input(event: InputEvent) -> void:
         if event_mouse_button.pressed:
             if event_mouse_button.button_index == MOUSE_BUTTON_LEFT:
                 var lane_type := lane_types[_hover_lane_index]
-                var tick := int(BEAT_CLOCK * _hover_step_index / float(steps_per_beat))
+                var tick := int(TICKS_PER_STEPS * _hover_step_index / float(steps_per_beat))
                 var note := Note.new(lane_type, tick)
                 notes.append(note)
             elif event_mouse_button.button_index == MOUSE_BUTTON_RIGHT:
@@ -92,10 +93,11 @@ func _draw() -> void:
     # TODO: 描画最適化
     for note in notes:
         var lane_index := lane_types.find(note.lane_type)
-        var step_index := int(note.tick * steps_per_beat / float(BEAT_CLOCK))
+        var step_index := int(note.tick * steps_per_beat / float(TICKS_PER_STEPS))
         var note_pos := Vector2(lane_index * _lane_width, step_index * _step_height)
         var note_color := LaneType.COLORS[note.lane_type]
-        draw_rect(Rect2(note_pos, Vector2(_lane_width, _step_height)), note_color)
+        draw_rect(Rect2(note_pos, Vector2(_lane_width, _step_height)), note_color, true)
+        draw_rect(Rect2(note_pos, Vector2(_lane_width, _step_height)), NOTE_OUTLINE_COLOR, false, 1.0)
     # TODO: 描画最適化
     if _is_hovered:
         var ghost_pos := Vector2(_hover_lane_index * _lane_width, _hover_step_index * _step_height)
