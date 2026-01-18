@@ -29,16 +29,22 @@ var bar_count := 64
 ## 1小節の高さ (px)
 var bar_height := 240.0
 
-
 var _lane_width = 0.0 # TODO: 再計算
 var _step_height = 0.0 # TODO: 再計算
 
+var _is_hovered := false
 var _hover_lane_index := 0
 var _hover_step_index := 0
 
 
 func _ready() -> void:
     print("[ChartGrid] _ready()")
+    mouse_entered.connect(func() -> void: _is_hovered = true)
+    mouse_exited.connect(func() -> void:
+        _is_hovered = false
+        queue_redraw()
+    )
+
     # 高さを初期化する
     custom_minimum_size = Vector2(0, bar_height * bar_count)
 
@@ -96,6 +102,7 @@ func _draw() -> void:
         var note_color := LaneType.COLORS[note.lane_type]
         draw_rect(Rect2(note_pos, Vector2(_lane_width, _step_height)), note_color)
     # TODO: 描画最適化
-    var ghost_pos := Vector2(_hover_lane_index * _lane_width, _hover_step_index * _step_height)
-    var ghost_color := Color(LaneType.COLORS[lane_types[_hover_lane_index]], 0.4)
-    draw_rect(Rect2(ghost_pos, Vector2(_lane_width, _step_height)), ghost_color)
+    if _is_hovered:
+        var ghost_pos := Vector2(_hover_lane_index * _lane_width, _hover_step_index * _step_height)
+        var ghost_color := Color(LaneType.COLORS[lane_types[_hover_lane_index]], 0.4)
+        draw_rect(Rect2(ghost_pos, Vector2(_lane_width, _step_height)), ghost_color)
