@@ -79,7 +79,7 @@ func _gui_input(event: InputEvent) -> void:
 
 func _draw() -> void:
     # 背景色 (全体)
-    draw_rect(Rect2(Vector2.ZERO, size), Color.BLACK)
+    draw_rect(Rect2(Vector2.ZERO, size), Color(Color.BLACK, 0.8))
     # 背景色 (レーンごと)
     for i in lane_types.size():
         var lane_type := lane_types[i]

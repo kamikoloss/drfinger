@@ -8,9 +8,9 @@ var _last_saved_at := 0
 @onready var _chart_grid: ChartGrid = %ChartGrid
 @onready var _scroll_container: ScrollContainer = %ScrollContainer
 
-@onready var _line_dir: LineEdit = %LineEditDir
-@onready var _line_audio: LineEdit = %LineEditAudio
-@onready var _line_movie: LineEdit = %LineEditMovie
+@onready var _line_edit_dir: LineEdit = %LineEditDir
+@onready var _line_edit_audio: LineEdit = %LineEditAudio
+@onready var _line_edit_video: LineEdit = %LineEditVideo
 #@onready var _line_edit_bpm: LineEdit = %LineEditBpm
 #@onready var _line_edit_offset: LineEdit = %LineEditOffset
 #@onready var _line_edit_beats: LineEdit = %LineEditBeats
@@ -19,16 +19,28 @@ var _last_saved_at := 0
 @onready var _button_open: Button = %ButtonOpen
 @onready var _button_save: Button = %ButtonSave
 
+@onready var _file_dialog: FileDialog = %FileDialog
+
+# Player
+@onready var _chart_player: ChartPlayer = %ChartPlayer
 @onready var _button_play: Button = %ButtonPlay
 @onready var _button_stop: Button = %ButtonStop
 
-@onready var _file_dialog: FileDialog = %FileDialog
 
 
 func _ready() -> void:
     print("[Editor] _ready()")
     _button_open.pressed.connect(_on_button_open_pressed)
     _button_save.pressed.connect(_on_button_save_pressed)
+    _button_play.pressed.connect(func() -> void:
+        var audio_path := USER_DATA_BASE_DIR + "/" + _line_edit_dir.text + "/" + _line_edit_audio.text
+        var vudeo_path := USER_DATA_BASE_DIR + "/" + _line_edit_dir.text + "/" + _line_edit_video.text
+        _chart_player.play(audio_path, vudeo_path)
+    )
+    _button_stop.pressed.connect(func() -> void:
+        _scroll_container.set_deferred("scroll_vertical", _chart_grid.custom_minimum_size.y)
+        _chart_player.stop()
+    )
 
     # ChartGrid のスクロールを一番下へ
     _scroll_container.set_deferred("scroll_vertical", _chart_grid.custom_minimum_size.y)
@@ -52,7 +64,7 @@ func _on_button_open_pressed() -> void:
     if not DirAccess.dir_exists_absolute(USER_DATA_BASE_DIR):
         print("[Editor] USER_DATA_BASE_DIR (%s) does not exist." % [USER_DATA_BASE_DIR])
         return
-    var track_name := _line_dir.text
+    var track_name := _line_edit_dir.text
     var dir_path := USER_DATA_BASE_DIR + "/" + track_name
     if not DirAccess.dir_exists_absolute(dir_path):
         print("[Editor] dir_path (%s) does not exist." % [dir_path])
@@ -83,7 +95,7 @@ func _on_button_save_pressed() -> void:
     # ディレクトリチェック
     if not DirAccess.dir_exists_absolute(USER_DATA_BASE_DIR):
         DirAccess.make_dir_absolute(USER_DATA_BASE_DIR)
-    var track_name := _line_dir.text
+    var track_name := _line_edit_dir.text
     var dir_path := USER_DATA_BASE_DIR + "/" + track_name
     if not DirAccess.dir_exists_absolute(dir_path):
         DirAccess.make_dir_absolute(dir_path)
