@@ -8,7 +8,10 @@ const LINE_COLOR_2 := Color(0.2, 0.2, 0.2)
 const LINE_COLOR_3 := Color(0.1, 0.1, 0.1)
 const NOTE_OUTLINE_COLOR := Color(0.4, 0.4, 0.4)
 
-var notes: Array[Note] = []
+var notes: Array[Note] = []:
+    set(v):
+        notes = v
+        queue_redraw()
 
 # TODO: Drum, MPC
 var lane_types: Array[String] = []

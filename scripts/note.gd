@@ -15,3 +15,7 @@ func serialize() -> Dictionary:
         "lt": lane_type,
         "ti": tick,
     }
+
+
+static func deserialize(dict: Dictionary) -> Note:
+    return new(dict["lt"], dict["ti"])
