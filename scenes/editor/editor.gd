@@ -14,6 +14,7 @@ const CHART_FILE_NAME := "chart.json"
 @onready var _button_save: Button = %ButtonSave
 @onready var _button_play: Button = %ButtonPlay
 @onready var _button_stop: Button = %ButtonStop
+@onready var _file_dialog: FileDialog = %FileDialog
 
 
 func _ready() -> void:
