@@ -16,3 +16,15 @@ func _ready() -> void:
     # ChartGrid のスクロールを一番下へ
     #_scroll_container.set_deferred("scroll_vertical", _scroll_container.get_v_scroll_bar().max_value) # 動かん
     _scroll_container.set_deferred("scroll_vertical", _chart_grid.custom_minimum_size.y)
+
+    # TODO: 設定
+    _chart_grid.lane_types = [
+        LaneType.Type.CYMBAL_CRASH,
+        LaneType.Type.HIHAT,
+        LaneType.Type.SNARE,
+        LaneType.Type.KICK,
+        LaneType.Type.TOM_HIGH,
+        LaneType.Type.TOM_LOW,
+        LaneType.Type.TOM_FLOOR,
+        LaneType.Type.CYMBAL_RIDE,
+    ]

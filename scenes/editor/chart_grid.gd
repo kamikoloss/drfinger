@@ -10,16 +10,7 @@ const LINE_COLOR_3 := Color(0.1, 0.1, 0.1)
 var notes: Array[Note] = []
 
 # TODO: Drum, MPC
-var lane_types: Array[LaneType.Type] = [
-    LaneType.Type.CYMBAL_CRASH,
-    LaneType.Type.HIHAT,
-    LaneType.Type.SNARE,
-    LaneType.Type.KICK,
-    LaneType.Type.TOM_HIGH,
-    LaneType.Type.TOM_LOW,
-    LaneType.Type.TOM_FLOOR,
-    LaneType.Type.CYMBAL_RIDE,
-]
+var lane_types: Array[LaneType.Type] = []
 ## 1小節あたりの拍子数
 var beats_per_bar := 4
 ## 1拍あたりの分割数
@@ -48,6 +39,13 @@ func _ready() -> void:
     # 高さを初期化する
     custom_minimum_size = Vector2(0, bar_height * bar_count)
 
+    # サイズに関する変数の初期化
+    resized.connect(func() -> void:
+        _lane_width = size.x / lane_types.size()
+        _step_height = bar_height / (beats_per_bar * steps_per_beat)
+        queue_redraw()
+    )
+
 
 func _gui_input(event: InputEvent) -> void:
     if event is InputEventMouseButton:
@@ -68,9 +66,6 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func _draw() -> void:
-    # TODO: ここに入れないと初期化うまくいかないがここでしたくない
-    _lane_width = size.x / lane_types.size()
-    _step_height = bar_height / (beats_per_bar * steps_per_beat)
     # 背景色 (全体)
     draw_rect(Rect2(Vector2.ZERO, size), Color.BLACK)
     # 背景色 (レーンごと)
