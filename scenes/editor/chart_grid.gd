@@ -62,7 +62,11 @@ func _gui_input(event: InputEvent) -> void:
                 var note := Note.new(lane_type, tick)
                 notes.append(note)
             elif event_mouse_button.button_index == MOUSE_BUTTON_RIGHT:
-                pass
+                var lane_type := lane_types[_hover_lane_index]
+                var tick := int(TICKS_PER_STEPS * _hover_step_index / float(steps_per_beat))
+                notes = notes.filter(func(note: Note) -> bool:
+                    return not(note.lane_type == lane_type and note.tick == tick)
+                )
     elif event is InputEventMouseMotion:
         #var event_mouse_motion := event as InputEventMouseMotion
         _hover_lane_index = int(event.position.x / _lane_width)

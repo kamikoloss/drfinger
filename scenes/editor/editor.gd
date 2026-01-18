@@ -88,6 +88,7 @@ func _on_button_save_pressed() -> void:
     if not DirAccess.dir_exists_absolute(dir_path):
         DirAccess.make_dir_absolute(dir_path)
 
+    # 書き込み
     var chart_path = dir_path + "/" + CHART_FILE_NAME
     var file := FileAccess.open(chart_path, FileAccess.WRITE)
     var notes_json := []
