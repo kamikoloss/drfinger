@@ -56,14 +56,17 @@ func _gui_input(event: InputEvent) -> void:
     if event is InputEventMouseButton:
         var event_mouse_button := event as InputEventMouseButton
         if event_mouse_button.pressed:
+            var lane_type := lane_types[_hover_lane_index]
+            var tick := int(TICKS_PER_STEPS * _hover_step_index / float(steps_per_beat))
             if event_mouse_button.button_index == MOUSE_BUTTON_LEFT:
-                var lane_type := lane_types[_hover_lane_index]
-                var tick := int(TICKS_PER_STEPS * _hover_step_index / float(steps_per_beat))
+                # 左クリック: Note を追加する
+                # TODO: 押しっぱなしでまとめて追加
+                # TODO: 被るところには置けないようにする
                 var note := Note.new(lane_type, tick)
                 notes.append(note)
             elif event_mouse_button.button_index == MOUSE_BUTTON_RIGHT:
-                var lane_type := lane_types[_hover_lane_index]
-                var tick := int(TICKS_PER_STEPS * _hover_step_index / float(steps_per_beat))
+                # 右クリック: Note を削除する
+                # TODO: 押しっぱなしでまとめて削除
                 notes = notes.filter(func(note: Note) -> bool:
                     return not(note.lane_type == lane_type and note.tick == tick)
                 )
