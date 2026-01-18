@@ -3,10 +3,10 @@ extends Control
 
 const TICKS_PER_STEPS := 960
 
-const LINE_COLOR_1 := Color(0.4, 0.4, 0.4)
-const LINE_COLOR_2 := Color(0.2, 0.2, 0.2)
-const LINE_COLOR_3 := Color(0.1, 0.1, 0.1)
-const NOTE_OUTLINE_COLOR := Color(0.4, 0.4, 0.4)
+const LINE_COLOR_1 := Color(Color.WHITE, 0.4)
+const LINE_COLOR_2 := Color(Color.WHITE, 0.2)
+const LINE_COLOR_3 := Color(Color.WHITE, 0.1)
+const NOTE_OUTLINE_COLOR := Color(Color.BLACK, 0.4)
 
 var notes: Array[Note] = []:
     set(v):

@@ -16,7 +16,7 @@ var _last_saved_at := 0
 #@onready var _line_edit_beats: LineEdit = %LineEditBeats
 #@onready var _line_edit_steps: LineEdit = %LineEditSteps
 @onready var _label_last_saved_at: Label = %LabelLastSavedAt
-@onready var _button_open: Button = %ButtonOpen
+@onready var _button_load: Button = %ButtonLoad
 @onready var _button_save: Button = %ButtonSave
 
 @onready var _file_dialog: FileDialog = %FileDialog
@@ -27,10 +27,9 @@ var _last_saved_at := 0
 @onready var _button_stop: Button = %ButtonStop
 
 
-
 func _ready() -> void:
     print("[Editor] _ready()")
-    _button_open.pressed.connect(_on_button_open_pressed)
+    _button_load.pressed.connect(_on_button_load_pressed)
     _button_save.pressed.connect(_on_button_save_pressed)
     _button_play.pressed.connect(func() -> void:
         var audio_path := USER_DATA_BASE_DIR + "/" + _line_edit_dir.text + "/" + _line_edit_audio.text
@@ -59,7 +58,7 @@ func _ready() -> void:
     ]
 
 
-func _on_button_open_pressed() -> void:
+func _on_button_load_pressed() -> void:
     # ディレクトリチェック
     if not DirAccess.dir_exists_absolute(USER_DATA_BASE_DIR):
         print("[Editor] USER_DATA_BASE_DIR (%s) does not exist." % [USER_DATA_BASE_DIR])

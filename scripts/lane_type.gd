@@ -2,8 +2,9 @@ class_name LaneType
 extends Object
 
 const Type := {
-    NONE = "_N",
+    NONE = "_",
     CLICK = "_C",
+    META = "_M",
     CYMBAL_CRASH_1 = "C1",
     CYMBAL_CRASH_2 = "C2",
     CYMBAL_RIDE = "CR",
