@@ -5,6 +5,7 @@ const CHART_FILE_NAME := "chart.json"
 
 const CHART_FILE_KEY_BPM = "bpm"
 const CHART_FILE_KEY_NOTES = "note"
+const CHART_FILE_KEY_OFFSET = "ofs"
 const CHART_FILE_KEY_SAVED_AT = "svat"
 const CHART_FILE_KEY_VERSION = "ver"
 
@@ -17,7 +18,7 @@ var _last_saved_at := 0
 @onready var _line_edit_audio: LineEdit = %LineEditAudio
 @onready var _line_edit_video: LineEdit = %LineEditVideo
 @onready var _line_edit_bpm: LineEdit = %LineEditBpm
-#@onready var _line_edit_offset: LineEdit = %LineEditOffset
+@onready var _line_edit_offset: LineEdit = %LineEditOffset
 #@onready var _line_edit_beats: LineEdit = %LineEditBeats
 #@onready var _line_edit_steps: LineEdit = %LineEditSteps
 @onready var _label_last_saved_at: Label = %LabelLastSavedAt
@@ -83,13 +84,13 @@ func _on_button_load_pressed() -> void:
     # 読み込み
     var file := FileAccess.open(chart_path, FileAccess.READ)
     var data = JSON.parse_string(file.get_line())
-    # bpm
+    # BPM
     if data.has(CHART_FILE_KEY_BPM):
         _chart_grid.bpm = float(data[CHART_FILE_KEY_BPM])
         _line_edit_bpm.text = data[CHART_FILE_KEY_BPM]
     else:
         printerr("[Editor] track data has not %s." % [CHART_FILE_KEY_BPM])
-    # notes
+    # NOTES
     if data.has(CHART_FILE_KEY_NOTES):
         var loaded_notes: Array[Note] = []
         for note_dict in data[CHART_FILE_KEY_NOTES]:
@@ -97,7 +98,13 @@ func _on_button_load_pressed() -> void:
         _chart_grid.notes = loaded_notes
     else:
         printerr("[Editor] track data has not %s." % [CHART_FILE_KEY_NOTES])
-    # saved at
+    # OFFSET
+    if data.has(CHART_FILE_KEY_OFFSET):
+        _chart_grid.offset = float(data[CHART_FILE_KEY_OFFSET])
+        _line_edit_offset.text = data[CHART_FILE_KEY_OFFSET]
+    else:
+        printerr("[Editor] track data has not %s." % [CHART_FILE_KEY_OFFSET])
+    # SAVED_AT
     if data.has(CHART_FILE_KEY_SAVED_AT):
         _last_saved_at = data[CHART_FILE_KEY_SAVED_AT]
         _label_last_saved_at.text = Time.get_datetime_string_from_unix_time(_last_saved_at)
@@ -122,6 +129,7 @@ func _on_button_save_pressed() -> void:
     var json_string := JSON.stringify({
         CHART_FILE_KEY_BPM: "%0.3f" % [_chart_grid.bpm],
         CHART_FILE_KEY_NOTES: _chart_grid.notes.map(func(v: Note): return v.serialize()),
+        CHART_FILE_KEY_OFFSET: "%0.3f" % [_chart_grid.offset_sec],
         CHART_FILE_KEY_SAVED_AT: _last_saved_at,
         CHART_FILE_KEY_VERSION: str(ProjectSettings.get_setting("application/config/version", "")),
     })

@@ -17,6 +17,8 @@ var notes: Array[Note] = []:
 var lane_types: Array[String] = []
 ## BPM
 var bpm := 120.0
+## 曲の開始タイミングのオフセット (sec)
+var offset_sec := 0.0
 ## 1小節あたりの拍子数
 var beats_per_bar := 4
 ## 1拍あたりの分割数
