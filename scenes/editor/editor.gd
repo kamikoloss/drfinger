@@ -47,6 +47,13 @@ func _ready() -> void:
         _chart_player.stop()
     )
 
+    _line_edit_bpm.text_changed.connect(func(new_text: String) -> void:
+        _chart_grid.bpm = float(new_text)
+    )
+    _line_edit_offset.text_changed.connect(func(new_text: String) -> void:
+        _chart_grid.offset_sec = float(new_text)
+    )
+
     # ChartGrid のスクロールを一番下へ
     _scroll_container.set_deferred("scroll_vertical", _chart_grid.custom_minimum_size.y)
 
@@ -100,7 +107,7 @@ func _on_button_load_pressed() -> void:
         printerr("[Editor] track data has not %s." % [CHART_FILE_KEY_NOTES])
     # OFFSET
     if data.has(CHART_FILE_KEY_OFFSET):
-        _chart_grid.offset = float(data[CHART_FILE_KEY_OFFSET])
+        _chart_grid.offset_sec = float(data[CHART_FILE_KEY_OFFSET])
         _line_edit_offset.text = data[CHART_FILE_KEY_OFFSET]
     else:
         printerr("[Editor] track data has not %s." % [CHART_FILE_KEY_OFFSET])
