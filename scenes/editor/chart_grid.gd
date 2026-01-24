@@ -3,7 +3,7 @@ extends Control
 
 const TICKS_PER_STEPS := 960
 const BAR_HEIGHT_BASE := 240.0 # (px)
-const NOTE_HEIGHT := 5.0 # (px)
+const NOTE_HEIGHT := 10.0 # (px)
 
 const LINE_COLOR_1 := Color(Color.WHITE, 0.4)
 const LINE_COLOR_2 := Color(Color.WHITE, 0.2)
@@ -118,7 +118,7 @@ func _draw() -> void:
     for note in notes:
         var color := LaneType.COLORS[note.lane_type]
         draw_rect(_get_note_rect(note.lane_type, note.tick), color, true)
-        draw_rect(_get_note_rect(note.lane_type, note.tick), NOTE_OUTLINE_COLOR, false, 1.0)
+        #draw_rect(_get_note_rect(note.lane_type, note.tick), NOTE_OUTLINE_COLOR, false, 1.0)
     # 配置予定の Note
     if _is_hovered:
         var lane_type := _get_lane_type_from_pos(_hover_position)
