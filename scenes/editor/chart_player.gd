@@ -43,8 +43,9 @@ func play(audio_path: String, video_path: String) -> void:
         _loaded_audio = load(audio_path)
     if FileAccess.file_exists(video_path):
         _loaded_video = load(video_path)
+
     if _loaded_audio == null and _loaded_video == null:
-        print("[ChartPlayer] audio_path (%s) and video_path (%s) does not exist." % [audio_path, video_path])
+        printerr("[ChartPlayer] audio_path (%s) and video_path (%s) do not exist." % [audio_path, video_path])
         return
     elif _loaded_audio != null and _loaded_video == null:
         _audio_stream_player_audio.stream = _loaded_audio
