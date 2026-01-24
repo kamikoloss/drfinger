@@ -3,10 +3,10 @@ extends Control
 const USER_DATA_BASE_DIR := "user://tracks"
 const CHART_FILE_NAME := "chart.json"
 
-const TRACK_DATA_KEY_BPM = "bpm"
-const TRACK_DATA_KEY_NOTES = "note"
-const TRACK_DATA_KEY_SAVED_AT = "svat"
-const TRACK_DATA_KEY_VERSION = "ver"
+const CHART_FILE_KEY_BPM = "bpm"
+const CHART_FILE_KEY_NOTES = "note"
+const CHART_FILE_KEY_SAVED_AT = "svat"
+const CHART_FILE_KEY_VERSION = "ver"
 
 var _last_saved_at := 0
 
@@ -84,25 +84,25 @@ func _on_button_load_pressed() -> void:
     var file := FileAccess.open(chart_path, FileAccess.READ)
     var data = JSON.parse_string(file.get_line())
     # bpm
-    if data.has(TRACK_DATA_KEY_BPM):
-        _chart_grid.bpm = float(data[TRACK_DATA_KEY_BPM])
-        _line_edit_bpm.text = data[TRACK_DATA_KEY_BPM]
+    if data.has(CHART_FILE_KEY_BPM):
+        _chart_grid.bpm = float(data[CHART_FILE_KEY_BPM])
+        _line_edit_bpm.text = data[CHART_FILE_KEY_BPM]
     else:
-        printerr("[Editor] track data has not %s." % [TRACK_DATA_KEY_BPM])
+        printerr("[Editor] track data has not %s." % [CHART_FILE_KEY_BPM])
     # notes
-    if data.has(TRACK_DATA_KEY_NOTES):
+    if data.has(CHART_FILE_KEY_NOTES):
         var loaded_notes: Array[Note] = []
-        for note_dict in data[TRACK_DATA_KEY_NOTES]:
+        for note_dict in data[CHART_FILE_KEY_NOTES]:
             loaded_notes.append(Note.deserialize(note_dict))
         _chart_grid.notes = loaded_notes
     else:
-        printerr("[Editor] track data has not %s." % [TRACK_DATA_KEY_NOTES])
+        printerr("[Editor] track data has not %s." % [CHART_FILE_KEY_NOTES])
     # saved at
-    if data.has(TRACK_DATA_KEY_SAVED_AT):
-        _last_saved_at = data[TRACK_DATA_KEY_SAVED_AT]
+    if data.has(CHART_FILE_KEY_SAVED_AT):
+        _last_saved_at = data[CHART_FILE_KEY_SAVED_AT]
         _label_last_saved_at.text = Time.get_datetime_string_from_unix_time(_last_saved_at)
     else:
-        printerr("[Editor] track data has not %s." % [TRACK_DATA_KEY_SAVED_AT])
+        printerr("[Editor] track data has not %s." % [CHART_FILE_KEY_SAVED_AT])
 
 
 func _on_button_save_pressed() -> void:
@@ -120,10 +120,10 @@ func _on_button_save_pressed() -> void:
     var chart_path = dir_path + "/" + CHART_FILE_NAME
     var file := FileAccess.open(chart_path, FileAccess.WRITE)
     var json_string := JSON.stringify({
-        TRACK_DATA_KEY_BPM: "%0.3f" % [_chart_grid.bpm],
-        TRACK_DATA_KEY_NOTES: _chart_grid.notes.map(func(v: Note): return v.serialize()),
-        TRACK_DATA_KEY_SAVED_AT: _last_saved_at,
-        TRACK_DATA_KEY_VERSION: str(ProjectSettings.get_setting("application/config/version", "")),
+        CHART_FILE_KEY_BPM: "%0.3f" % [_chart_grid.bpm],
+        CHART_FILE_KEY_NOTES: _chart_grid.notes.map(func(v: Note): return v.serialize()),
+        CHART_FILE_KEY_SAVED_AT: _last_saved_at,
+        CHART_FILE_KEY_VERSION: str(ProjectSettings.get_setting("application/config/version", "")),
     })
     file.store_line(json_string)
 
