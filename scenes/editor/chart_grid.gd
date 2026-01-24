@@ -3,7 +3,7 @@ extends Control
 
 const TICKS_PER_STEPS := 960
 const BAR_HEIGHT_BASE := 240.0 # (px)
-const NOTE_HEIGHT := 4.0 # (px)
+const NOTE_HEIGHT := 5.0 # (px)
 
 const LINE_COLOR_1 := Color(Color.WHITE, 0.4)
 const LINE_COLOR_2 := Color(Color.WHITE, 0.2)
@@ -123,6 +123,7 @@ func _draw() -> void:
     if _is_hovered:
         var lane_type := _get_lane_type_from_pos(_hover_position)
         var tick := _get_tick_from_pos(_hover_position)
+        #print("lane_type: %s, tick: %s" % [lane_type, tick]) # debug
         var color := Color(LaneType.COLORS[lane_type], 0.4)
         draw_rect(_get_note_rect(lane_type, tick), color)
 
@@ -133,13 +134,15 @@ func _get_lane_type_from_pos(pos: Vector2) -> String:
 
 
 func _get_tick_from_pos(pos: Vector2) -> int:
-    var step_index := int(pos.y / _step_height)
-    return  int(TICKS_PER_STEPS * step_index / float(steps_per_beat))
+    var step_index := int((size.y- pos.y) / _step_height)
+    #print("_get_tick_from_pos() step_index: %s" % [step_index]) # debug
+    return int(TICKS_PER_STEPS * step_index / float(steps_per_beat))
 
 
 func _get_note_rect(lane_type: String, tick: int) -> Rect2:
     var lane_index := lane_types.find(lane_type)
     var step_index := int(tick * steps_per_beat / float(TICKS_PER_STEPS))
+    #print("_get_note_rect() step_index: %s" % [step_index]) # debug
     var x := lane_index * _lane_width
-    var y := step_index * _step_height
-    return Rect2(x, y, _lane_width, _step_height)
+    var y := size.y - step_index * _step_height - NOTE_HEIGHT
+    return Rect2(x, y, _lane_width, NOTE_HEIGHT)
