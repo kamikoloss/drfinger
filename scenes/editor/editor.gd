@@ -106,8 +106,8 @@ func _on_button_save_pressed() -> void:
     for note in _chart_grid.notes:
         notes_json.append(note.serialize())
     var json_string := JSON.stringify({
-        "ns": notes_json,
         "sv": _last_saved_at,
+        "ns": notes_json,
     })
     file.store_line(json_string)
 

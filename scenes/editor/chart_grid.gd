@@ -101,6 +101,8 @@ func _draw() -> void:
     for lane_index in lane_types.size():
         line_x += _lane_width
         draw_line(Vector2(line_x, 0), Vector2(line_x, size.y), LINE_COLOR_1)
+
+    # Note
     # TODO: 描画最適化
     for note in notes:
         var lane_index := lane_types.find(note.lane_type)
@@ -109,6 +111,7 @@ func _draw() -> void:
         var note_color := LaneType.COLORS[note.lane_type]
         draw_rect(Rect2(note_pos, Vector2(_lane_width, _step_height)), note_color, true)
         draw_rect(Rect2(note_pos, Vector2(_lane_width, _step_height)), NOTE_OUTLINE_COLOR, false, 1.0)
+    # Note (配置前のゴースト)
     # TODO: 描画最適化
     if _is_hovered:
         var ghost_pos := Vector2(_hover_lane_index * _lane_width, _hover_step_index * _step_height)
