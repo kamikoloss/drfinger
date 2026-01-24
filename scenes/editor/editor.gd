@@ -85,8 +85,8 @@ func _on_button_load_pressed() -> void:
     var data = JSON.parse_string(file.get_line())
     # bpm
     if data.has(TRACK_DATA_KEY_BPM):
-        _chart_grid.bpm = data[TRACK_DATA_KEY_BPM]
-        _line_edit_bpm.text = str(data[TRACK_DATA_KEY_BPM])
+        _chart_grid.bpm = float(data[TRACK_DATA_KEY_BPM])
+        _line_edit_bpm.text = data[TRACK_DATA_KEY_BPM]
     else:
         printerr("[Editor] track data has not %s." % [TRACK_DATA_KEY_BPM])
     # notes
@@ -120,7 +120,7 @@ func _on_button_save_pressed() -> void:
     var chart_path = dir_path + "/" + CHART_FILE_NAME
     var file := FileAccess.open(chart_path, FileAccess.WRITE)
     var json_string := JSON.stringify({
-        TRACK_DATA_KEY_BPM: _chart_grid.bpm,
+        TRACK_DATA_KEY_BPM: "%0.3f" % [_chart_grid.bpm],
         TRACK_DATA_KEY_NOTES: _chart_grid.notes.map(func(v: Note): return v.serialize()),
         TRACK_DATA_KEY_SAVED_AT: _last_saved_at,
         TRACK_DATA_KEY_VERSION: str(ProjectSettings.get_setting("application/config/version", "")),
