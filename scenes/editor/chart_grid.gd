@@ -2,6 +2,7 @@ class_name ChartGrid
 extends Control
 
 const TICKS_PER_STEPS := 960
+const BAR_HEIGHT_BASE := 240.0 # (px)
 
 const LINE_COLOR_1 := Color(Color.WHITE, 0.4)
 const LINE_COLOR_2 := Color(Color.WHITE, 0.2)
@@ -25,12 +26,20 @@ var beats_per_bar := 4
 var steps_per_beat := 4
 ## 小節数
 var bar_count := 64
+## ズーム率
+var zoom_rate := 1.0:
+    set(v):
+        _bar_height = BAR_HEIGHT_BASE * zoom_rate
 
+## 1レーンの長さ (px)
+var _lane_width = 0.0
 ## 1小節の高さ (px)
-var bar_height := 240.0
-
-var _lane_width = 0.0 # TODO: 再計算
-var _step_height = 0.0 # TODO: 再計算
+var _bar_height := 0.0:
+    set(v):
+        _bar_height = v
+        _step_height = _bar_height / (beats_per_bar * steps_per_beat)
+## 1ステップの高さ (px)
+var _step_height = 0.0
 
 var _is_hovered := false
 var _hover_lane_index := 0
@@ -46,37 +55,36 @@ func _ready() -> void:
     )
 
     # 高さを初期化する
-    custom_minimum_size = Vector2(0, bar_height * bar_count)
-
-    # サイズに関する変数の初期化
-    # NOTE: size.x が resized の後じゃないと取得できない
+    # TODO: 小節数が変わったら再計算する
+    _bar_height = BAR_HEIGHT_BASE
+    custom_minimum_size = Vector2(0, _bar_height * bar_count)
+    # NOTE: resized を待たないと size　が取れない
     resized.connect(func() -> void:
         _lane_width = size.x / lane_types.size()
-        _step_height = bar_height / (beats_per_bar * steps_per_beat)
         queue_redraw()
     )
 
 
 func _gui_input(event: InputEvent) -> void:
     if event is InputEventMouseButton:
-        var event_mouse_button := event as InputEventMouseButton
-        if event_mouse_button.pressed:
+        event = event as InputEventMouseButton
+        if event.pressed:
             var lane_type := lane_types[_hover_lane_index]
             var tick := int(TICKS_PER_STEPS * _hover_step_index / float(steps_per_beat))
-            if event_mouse_button.button_index == MOUSE_BUTTON_LEFT:
+            if event.button_index == MOUSE_BUTTON_LEFT:
                 # 左クリック: Note を追加する
                 # TODO: 押しっぱなしでまとめて追加
                 # TODO: 被るところには置けないようにする
                 var note := Note.new(lane_type, tick)
                 notes.append(note)
-            elif event_mouse_button.button_index == MOUSE_BUTTON_RIGHT:
+            elif event.button_index == MOUSE_BUTTON_RIGHT:
                 # 右クリック: Note を削除する
                 # TODO: 押しっぱなしでまとめて削除
                 notes = notes.filter(func(note: Note) -> bool:
                     return not(note.lane_type == lane_type and note.tick == tick)
                 )
     elif event is InputEventMouseMotion:
-        #var event_mouse_motion := event as InputEventMouseMotion
+        event = event as InputEventMouseMotion
         _hover_lane_index = int(event.position.x / _lane_width)
         _hover_step_index = int(event.position.y / _step_height)
         queue_redraw()
