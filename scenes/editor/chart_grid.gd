@@ -3,6 +3,7 @@ extends Control
 
 const TICKS_PER_STEPS := 960
 const BAR_HEIGHT_BASE := 240.0 # (px)
+const NOTE_HEIGHT := 4.0 # (px)
 
 const LINE_COLOR_1 := Color(Color.WHITE, 0.4)
 const LINE_COLOR_2 := Color(Color.WHITE, 0.2)
@@ -32,18 +33,17 @@ var zoom_rate := 1.0:
         _bar_height = BAR_HEIGHT_BASE * zoom_rate
 
 ## 1レーンの長さ (px)
-var _lane_width = 0.0
+var _lane_width := 0.0
 ## 1小節の高さ (px)
 var _bar_height := 0.0:
     set(v):
         _bar_height = v
         _step_height = _bar_height / (beats_per_bar * steps_per_beat)
 ## 1ステップの高さ (px)
-var _step_height = 0.0
+var _step_height := 0.0
 
 var _is_hovered := false
-var _hover_lane_index := 0
-var _hover_step_index := 0
+var _hover_position := Vector2.ZERO
 
 
 func _ready() -> void:
@@ -69,8 +69,8 @@ func _gui_input(event: InputEvent) -> void:
     if event is InputEventMouseButton:
         event = event as InputEventMouseButton
         if event.pressed:
-            var lane_type := lane_types[_hover_lane_index]
-            var tick := int(TICKS_PER_STEPS * _hover_step_index / float(steps_per_beat))
+            var lane_type := _get_lane_type_from_pos(_hover_position)
+            var tick := _get_tick_from_pos(_hover_position)
             if event.button_index == MOUSE_BUTTON_LEFT:
                 # 左クリック: Note を追加する
                 # TODO: 押しっぱなしでまとめて追加
@@ -85,8 +85,7 @@ func _gui_input(event: InputEvent) -> void:
                 )
     elif event is InputEventMouseMotion:
         event = event as InputEventMouseMotion
-        _hover_lane_index = int(event.position.x / _lane_width)
-        _hover_step_index = int(event.position.y / _step_height)
+        _hover_position = event.position
         queue_redraw()
 
 
@@ -115,18 +114,32 @@ func _draw() -> void:
         line_x += _lane_width
         draw_line(Vector2(line_x, 0), Vector2(line_x, size.y), LINE_COLOR_1)
 
-    # Note
-    # TODO: 描画最適化
+    # 配置済みの Note
     for note in notes:
-        var lane_index := lane_types.find(note.lane_type)
-        var step_index := int(note.tick * steps_per_beat / float(TICKS_PER_STEPS))
-        var note_pos := Vector2(lane_index * _lane_width, step_index * _step_height)
-        var note_color := LaneType.COLORS[note.lane_type]
-        draw_rect(Rect2(note_pos, Vector2(_lane_width, _step_height)), note_color, true)
-        draw_rect(Rect2(note_pos, Vector2(_lane_width, _step_height)), NOTE_OUTLINE_COLOR, false, 1.0)
-    # Note (配置前のゴースト)
-    # TODO: 描画最適化
+        var color := LaneType.COLORS[note.lane_type]
+        draw_rect(_get_note_rect(note.lane_type, note.tick), color, true)
+        draw_rect(_get_note_rect(note.lane_type, note.tick), NOTE_OUTLINE_COLOR, false, 1.0)
+    # 配置予定の Note
     if _is_hovered:
-        var ghost_pos := Vector2(_hover_lane_index * _lane_width, _hover_step_index * _step_height)
-        var ghost_color := Color(LaneType.COLORS[lane_types[_hover_lane_index]], 0.4)
-        draw_rect(Rect2(ghost_pos, Vector2(_lane_width, _step_height)), ghost_color)
+        var lane_type := _get_lane_type_from_pos(_hover_position)
+        var tick := _get_tick_from_pos(_hover_position)
+        var color := Color(LaneType.COLORS[lane_type], 0.4)
+        draw_rect(_get_note_rect(lane_type, tick), color)
+
+
+func _get_lane_type_from_pos(pos: Vector2) -> String:
+    var lane_index := int(pos.x / _lane_width)
+    return lane_types[lane_index]
+
+
+func _get_tick_from_pos(pos: Vector2) -> int:
+    var step_index := int(pos.y / _step_height)
+    return  int(TICKS_PER_STEPS * step_index / float(steps_per_beat))
+
+
+func _get_note_rect(lane_type: String, tick: int) -> Rect2:
+    var lane_index := lane_types.find(lane_type)
+    var step_index := int(tick * steps_per_beat / float(TICKS_PER_STEPS))
+    var x := lane_index * _lane_width
+    var y := step_index * _step_height
+    return Rect2(x, y, _lane_width, _step_height)
