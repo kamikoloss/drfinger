@@ -102,12 +102,10 @@ func _on_button_save_pressed() -> void:
     # 書き込み
     var chart_path = dir_path + "/" + CHART_FILE_NAME
     var file := FileAccess.open(chart_path, FileAccess.WRITE)
-    var notes_json := []
-    for note in _chart_grid.notes:
-        notes_json.append(note.serialize())
     var json_string := JSON.stringify({
+        "nt": _chart_grid.notes.map(func(v: Note): return v.serialize()),
         "sv": _last_saved_at,
-        "ns": notes_json,
+        "v": str(ProjectSettings.get_setting("application/config/version", ""))
     })
     file.store_line(json_string)
 
