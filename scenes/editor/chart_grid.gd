@@ -15,12 +15,15 @@ var notes: Array[Note] = []:
 
 # TODO: Drum, MPC
 var lane_types: Array[String] = []
+## BPM
+var bpm := 120
 ## 1小節あたりの拍子数
 var beats_per_bar := 4
 ## 1拍あたりの分割数
 var steps_per_beat := 4
 ## 小節数
 var bar_count := 64
+
 ## 1小節の高さ (px)
 var bar_height := 240.0
 

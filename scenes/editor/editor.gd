@@ -3,6 +3,11 @@ extends Control
 const USER_DATA_BASE_DIR := "user://tracks"
 const CHART_FILE_NAME := "chart.json"
 
+const TRACK_DATA_KEY_BPM = "bpm"
+const TRACK_DATA_KEY_NOTES = "note"
+const TRACK_DATA_KEY_SAVED_AT = "svat"
+const TRACK_DATA_KEY_VERSION = "ver"
+
 var _last_saved_at := 0
 
 @onready var _chart_grid: ChartGrid = %ChartGrid
@@ -11,7 +16,7 @@ var _last_saved_at := 0
 @onready var _line_edit_dir: LineEdit = %LineEditDir
 @onready var _line_edit_audio: LineEdit = %LineEditAudio
 @onready var _line_edit_video: LineEdit = %LineEditVideo
-#@onready var _line_edit_bpm: LineEdit = %LineEditBpm
+@onready var _line_edit_bpm: LineEdit = %LineEditBpm
 #@onready var _line_edit_offset: LineEdit = %LineEditOffset
 #@onready var _line_edit_beats: LineEdit = %LineEditBeats
 #@onready var _line_edit_steps: LineEdit = %LineEditSteps
@@ -61,31 +66,43 @@ func _ready() -> void:
 func _on_button_load_pressed() -> void:
     # ディレクトリチェック
     if not DirAccess.dir_exists_absolute(USER_DATA_BASE_DIR):
-        print("[Editor] USER_DATA_BASE_DIR (%s) does not exist." % [USER_DATA_BASE_DIR])
+        printerr("[Editor] USER_DATA_BASE_DIR (%s) does not exist." % [USER_DATA_BASE_DIR])
         return
     var track_name := _line_edit_dir.text
     var dir_path := USER_DATA_BASE_DIR + "/" + track_name
     if not DirAccess.dir_exists_absolute(dir_path):
-        print("[Editor] dir_path (%s) does not exist." % [dir_path])
+        printerr("[Editor] dir_path (%s) does not exist." % [dir_path])
         return
 
     # ファイルチェック
     var chart_path = dir_path + "/" + CHART_FILE_NAME
     if not FileAccess.file_exists(chart_path):
-        print("[Editor] chart_path (%s) does not exist." % [chart_path])
+        printerr("[Editor] chart_path (%s) does not exist." % [chart_path])
         return
 
     # 読み込み
     var file := FileAccess.open(chart_path, FileAccess.READ)
     var data = JSON.parse_string(file.get_line())
-    # ns
-    var loaded_notes: Array[Note] = []
-    for note_dict in data["ns"]:
-        loaded_notes.append(Note.deserialize(note_dict))
-    _chart_grid.notes = loaded_notes
-    # sv
-    _last_saved_at = data["sv"]
-    _label_last_saved_at.text = Time.get_datetime_string_from_unix_time(_last_saved_at)
+    # bpm
+    if data.has(TRACK_DATA_KEY_BPM):
+        _chart_grid.bpm = data[TRACK_DATA_KEY_BPM]
+        _line_edit_bpm.text = str(data[TRACK_DATA_KEY_BPM])
+    else:
+        printerr("[Editor] track data has not %s." % [TRACK_DATA_KEY_BPM])
+    # notes
+    if data.has(TRACK_DATA_KEY_NOTES):
+        var loaded_notes: Array[Note] = []
+        for note_dict in data[TRACK_DATA_KEY_NOTES]:
+            loaded_notes.append(Note.deserialize(note_dict))
+        _chart_grid.notes = loaded_notes
+    else:
+        printerr("[Editor] track data has not %s." % [TRACK_DATA_KEY_NOTES])
+    # saved at
+    if data.has(TRACK_DATA_KEY_SAVED_AT):
+        _last_saved_at = data[TRACK_DATA_KEY_SAVED_AT]
+        _label_last_saved_at.text = Time.get_datetime_string_from_unix_time(_last_saved_at)
+    else:
+        printerr("[Editor] track data has not %s." % [TRACK_DATA_KEY_SAVED_AT])
 
 
 func _on_button_save_pressed() -> void:
@@ -103,9 +120,10 @@ func _on_button_save_pressed() -> void:
     var chart_path = dir_path + "/" + CHART_FILE_NAME
     var file := FileAccess.open(chart_path, FileAccess.WRITE)
     var json_string := JSON.stringify({
-        "nt": _chart_grid.notes.map(func(v: Note): return v.serialize()),
-        "sv": _last_saved_at,
-        "v": str(ProjectSettings.get_setting("application/config/version", ""))
+        TRACK_DATA_KEY_BPM: _chart_grid.bpm,
+        TRACK_DATA_KEY_NOTES: _chart_grid.notes.map(func(v: Note): return v.serialize()),
+        TRACK_DATA_KEY_SAVED_AT: _last_saved_at,
+        TRACK_DATA_KEY_VERSION: str(ProjectSettings.get_setting("application/config/version", "")),
     })
     file.store_line(json_string)
 
